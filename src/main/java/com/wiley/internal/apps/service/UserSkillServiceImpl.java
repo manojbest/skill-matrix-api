@@ -1,6 +1,7 @@
 package com.wiley.internal.apps.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +68,16 @@ public class UserSkillServiceImpl implements UserSkillService {
 	}
 
 	@Override
+	public List<UserSkill> getSkillForUser(String username) {
+		// TODO Auto-generated method stub
+		Optional<User> user = this.userRepository.findById(username);
+		
+		if (!user.isPresent()) {
+			throw new UserNotFoundException("User does not exsits :: " + username);
+		}
+		return this.userSkillRepository.findByUser(user.get());
+	}
+	
 	public List<UserSkill> filterUsersForSkills(List<UserSkillSearch> userSkillSearchList) {
 		
 		List<UserSkill> userSkillList = new ArrayList<>();
@@ -94,6 +105,7 @@ public class UserSkillServiceImpl implements UserSkillService {
 		});
 		
 		return userSkillList;
+
 	}
 
 }

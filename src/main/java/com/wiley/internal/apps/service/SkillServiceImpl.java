@@ -33,9 +33,14 @@ public class SkillServiceImpl implements SkillService {
 		this.skillRepository.deleteById(skillId);		
 	}
 
-	@Override
 	public List<Skill> findSkillByName(String skillName) {
 		return this.skillRepository.findByNameContaining(skillName);
+	}
+
+	@Override
+	public Skill findById(Long id) {
+		// TODO Auto-generated method stub
+		return skillRepository.findById(id).get();
 	}
 
 }

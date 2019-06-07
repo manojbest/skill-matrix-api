@@ -27,6 +27,8 @@ HELP.md
 
 /USER_HOME_IS_UNDEFINED/
 /[Help
-
+/logs
+*.log
+*.log.*
 ### VS Code ###
 .vscode/

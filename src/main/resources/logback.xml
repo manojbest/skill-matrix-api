@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+	
+	<springProperty scope="context" name="LOG_DIR"
+		source="logging.path" defaultValue="logs" />
+	
+	<springProperty scope="context" name="LOG_FILE"
+		source="logging.file" defaultValue="skill-matrix.log" />
+	
 	<include
 		resource="org/springframework/boot/logging/logback/base.xml" />
 	<springProfile name="dev">
@@ -8,7 +15,7 @@
 			<appender name="FILE"
 				class="ch.qos.logback.core.FileAppender">
 				<!-- Here we can refer to the variable defined at the resource1.properties -->
-				<file>${USER_HOME}/skill-matrix.log</file>
+				<file>${LOG_DIR}/${LOG_FILE}</file>
 				<encoder>
 					<pattern>%msg%n</pattern>
 				</encoder>
@@ -23,7 +30,7 @@
 			<appender name="FILE"
 				class="ch.qos.logback.core.FileAppender">
 				<!-- Here we can refer to the variable defined at the resource1.properties -->
-				<file>${USER_HOME}/skill-matrix.log</file>
+				<file>${LOG_DIR}/${LOG_FILE}</file>
 				<encoder>
 					<pattern>%msg%n</pattern>
 				</encoder>

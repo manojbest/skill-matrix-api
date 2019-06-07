@@ -37,13 +37,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUser(String userName) {
-		Optional<User> userOprtional = this.userRepository.findById(userName);
+		
+	Optional<User> userOprtional = this.userRepository.findById(userName);
 		
 		if (!userOprtional.isPresent()) {
 			throw new UserNotFoundException("User does not exsists :: " + userName);
 		}
 		
 		return userOprtional.get();
+	}
+
+	@Override
+	public List<User> findByUserNameIgnoreCaseContaining(String userName) {
+		// TODO Auto-generated method stub
+		return userRepository.findByUserNameIgnoreCaseContaining(userName);
 	}
 
 }

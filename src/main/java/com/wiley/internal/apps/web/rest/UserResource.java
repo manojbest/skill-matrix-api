@@ -1,5 +1,7 @@
 package com.wiley.internal.apps.web.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wiley.internal.apps.domain.User;
 import com.wiley.internal.apps.domain.UserSkill;
+import com.wiley.internal.apps.service.UserAuthService;
 import com.wiley.internal.apps.service.UserService;
 import com.wiley.internal.apps.service.UserSkillService;
 
@@ -21,16 +24,28 @@ public class UserResource {
 	private UserService userService;
 
 	private UserSkillService userSkillService;
+	
+	private UserAuthService userAuthService;
 
 	@Autowired
-	public UserResource(final UserService userService, final UserSkillService userSkillService) {
+	public UserResource(
+			final UserService userService, 
+			final UserSkillService userSkillService, 
+			final UserAuthService userAuthService) {
+		
 		this.userService = userService;
 		this.userSkillService = userSkillService;
+		this.userAuthService = userAuthService;
 	}
 
 	@GetMapping("/v1/users/{userName}")
-	public User handleUserGet(@PathVariable String userName) {
-		return this.userService.findUser(userName);
+	public List<User> handleUserGet(@PathVariable String userName) {
+		return userService.findByUserNameIgnoreCaseContaining(userName);
+	}
+	
+	@GetMapping("/users/{userName}/roles")
+	public List<String> handleUserGetUserRoles(@PathVariable String userName) {
+		return userAuthService.getByUsername(userName);
 	}
 
 	@DeleteMapping("/v1/users/{userName}")

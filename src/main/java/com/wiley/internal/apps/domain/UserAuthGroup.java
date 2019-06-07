@@ -8,23 +8,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
-@Table(name = "SKILL")
-public class Skill {
-
+@Table(name="AUTH_USER_GROUP")
+public class UserAuthGroup {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "SKILL_ID")
-	private Long id;
-
-	@Column(name = "Name")
-	@Size(max = 10, message = "skill name can not have more than 10 characters")
-	private String name;
+    @Column(name="AUTH_USER_GROUP_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    
+    @Column(name="USERNAME")
+    private String username;
+    
+    @Column(name="AUTH_GROUP")
+    private String authGroup;
 
     @CreatedDate
     @Column(name = "created_date")
@@ -34,22 +35,35 @@ public class Skill {
     @Column(name = "last_modified_date")
     private Date lastModifiedDate;
     
-	public Long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setName(String name) {
-		this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAuthGroup() {
+        return authGroup;
+    }
+
+    public void setAuthGroup(String authGroup) {
+        this.authGroup = authGroup;
+    }
+    
+    @Override
+	public String toString() {
+		return "UserAuthGroup [id=" + id + ", username=" + username + ", authGroup=" + authGroup + "]";
 	}
-	
+    
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -65,6 +79,4 @@ public class Skill {
 	public void setLastModifiedDate(Date lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
 	}
-	    
 }
-

@@ -1,10 +1,36 @@
 server:
   port: 8082
-  
 spring:
   jpa:
     show-sql: true
-  h2:
-    console:
-      path: /h2-console
-      enabled: true
+    h2:
+      console:
+        path: /h2-console
+        enabled: true
+        settings:
+          web-allow-others: true
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: false
+#      dialect: org.hibernate.dialect.MySQLMyISAMDialect
+  profiles:
+      active: dev    
+  logging:
+    file: skill-matrix.log
+    path: ~/
+  datasource:  
+#    username: root
+#    password: root
+#    url: jdbc:mysql://localhost:3306/sl_wiley_resources
+    initialization-mode: always
+app:
+  security:
+    basic: 
+      enabled: false
+okta:
+  oauth2:
+    issuer: https://dev-268158.okta.com/oauth2/default
+    clientId: 0oaocww3nHiMX0Ixl356
+    clientSecret: 4q6_Aw0keav6atCn1t5ODbL9UV8pbR7nzHw-ZcSs
+    redirect-uri: /authorization-code/callback
+    

@@ -13,4 +13,6 @@ public interface UserService {
 	void deleteUser(String userName);
 	
 	User findUser(String userName);
+	
+	List<User> findByUserNameIgnoreCaseContaining(String userName);
 }
